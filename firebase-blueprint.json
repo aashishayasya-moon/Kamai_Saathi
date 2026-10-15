@@ -1,0 +1,151 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile in Kamai Saathi",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User full name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User profile photo URL"
+        },
+        "role": {
+          "type": "string",
+          "description": "Selected occupation or earner role"
+        },
+        "language": {
+          "type": "string",
+          "description": "Preferred UI and audio language code"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of account creation"
+        }
+      },
+      "required": ["uid", "email", "displayName", "createdAt"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Deterministic financial ledger transaction item",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique transaction ID"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner user UID"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["income", "expense"],
+          "description": "Cash flow direction"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Transaction amount in rupees"
+        },
+        "amountPaise": {
+          "type": "number",
+          "description": "Integer paise to eliminate floating point rounding"
+        },
+        "currency": {
+          "type": "string",
+          "description": "Currency code, defaults to INR"
+        },
+        "category": {
+          "type": "string",
+          "description": "Income or expense classification"
+        },
+        "date": {
+          "type": "string",
+          "description": "ISO date string YYYY-MM-DD"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 300,
+          "description": "Summary label of transaction"
+        },
+        "entryMethod": {
+          "type": "string",
+          "enum": ["manual", "voice", "preset"],
+          "description": "How the entry was recorded"
+        },
+        "confirmationStatus": {
+          "type": "string",
+          "enum": ["confirmed", "pending_review"],
+          "description": "User confirmation status"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Creation timestamp"
+        }
+      },
+      "required": ["id", "userId", "type", "amount", "amountPaise", "category", "date", "description", "createdAt"]
+    },
+    "ScheduledObligation": {
+      "title": "ScheduledObligation",
+      "description": "Mandatory recurring liabilities like loan EMIs and rent",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Obligation identifier"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Owner user UID"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Obligation name"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount due in INR"
+        },
+        "dueDay": {
+          "type": "number",
+          "description": "Day in 14-day projection when due"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category (emi, rent, etc.)"
+        },
+        "isMandatory": {
+          "type": "boolean",
+          "description": "Whether non-payment triggers penalty"
+        }
+      },
+      "required": ["id", "userId", "title", "amount", "dueDay", "category", "isMandatory"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User private profile record"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User ledger transactions subcollection"
+    },
+    "/users/{userId}/obligations/{obligationId}": {
+      "schema": "ScheduledObligation",
+      "description": "User scheduled loan EMIs and obligations"
+    }
+  }
+}

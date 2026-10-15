@@ -57,9 +57,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-6">
-        <div className="flex items-center justify-between h-16 gap-1.5 sm:gap-3">
+        <div className="flex items-center justify-between h-16 gap-1 sm:gap-2">
           {/* Zone 1: Brand Wordmark */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             <button
               onClick={() => onSelectTab('home')}
               className="flex items-center text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-lg p-0.5"
@@ -67,11 +67,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               <BrandLogo size="md" showTagline={false} />
             </button>
 
-            {/* Privacy Mode Badge */}
+            {/* Privacy Mode Badge (2XL screens only) */}
             <button
               onClick={onToggleLocalOnly}
               title={isLocalOnly ? 'Running in strict local offline mode' : 'Cloud AI enabled with privacy minimization'}
-              className={`hidden md:inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-full border transition-colors ${
+              className={`hidden 2xl:inline-flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-full border transition-colors ${
                 isLocalOnly
                   ? 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-slate-700'
                   : 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
@@ -88,8 +88,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
           </div>
 
-          {/* Zone 2: Navigation Links (Desktop 1280px+) */}
-          <nav className="hidden xl:flex items-center gap-1">
+          {/* Zone 2: Navigation Links (Compact Desktop 1280px+) */}
+          <nav className="hidden xl:flex items-center gap-0.5 lg:gap-1 shrink-0">
             {[
               { id: 'home', label: t.nav.home },
               { id: 'ledger', label: t.nav.ledger },
@@ -102,7 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => onSelectTab(item.id)}
-                  className={`px-2.5 py-1.5 text-xs xl:text-sm font-semibold rounded-lg transition-colors whitespace-nowrap shrink-0 ${
+                  className={`px-2 py-1.5 text-xs lg:text-sm font-semibold rounded-lg transition-colors whitespace-nowrap shrink-0 ${
                     isActive
                       ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/40'
                       : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
@@ -115,21 +115,21 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             <button
               onClick={onOpenSchemesModal}
-              className="px-2.5 py-1.5 text-xs xl:text-sm font-semibold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-lg transition-colors whitespace-nowrap shrink-0"
+              className="px-2 py-1.5 text-xs lg:text-sm font-semibold text-emerald-700 dark:text-emerald-400 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 rounded-lg transition-colors whitespace-nowrap shrink-0"
             >
               {t.nav.schemes}
             </button>
           </nav>
 
-          {/* Zone 3: Actions (Language, Persona, Theme Toggle, Quick Log) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Zone 3: Actions (Language, Persona, Theme Toggle, Quick Log, Sign Out) */}
+          <div className="flex items-center gap-1 sm:gap-1.5 lg:gap-2 shrink-0">
             {/* Language Selector Dropdown */}
-            <div className="relative flex items-center">
+            <div className="relative flex items-center shrink-0">
               <Globe className="w-3.5 h-3.5 text-slate-500 mr-1 hidden sm:inline" />
               <select
                 value={language}
                 onChange={(e) => onSelectLanguage(e.target.value as Language)}
-                className="text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg px-1.5 sm:px-2 py-1.5 focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer max-w-[80px] sm:max-w-[110px] md:max-w-none"
+                className="text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg px-1.5 py-1.5 focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer max-w-[80px] sm:max-w-[95px] lg:max-w-[110px] truncate"
                 aria-label="Select Interface Language"
               >
                 {(Object.keys(languageLabels) as Language[]).map((lang) => (
@@ -141,7 +141,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* Persona Switcher Dropdown */}
-            <div className="relative flex items-center">
+            <div className="relative flex items-center shrink-0">
               <Users className="w-3.5 h-3.5 text-slate-500 mr-1 hidden sm:inline" />
               <select
                 value={activePersona.id}
@@ -149,7 +149,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   const found = allPersonas.find((p) => p.id === e.target.value);
                   if (found) onSelectPersona(found);
                 }}
-                className="text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg px-1.5 sm:px-2 py-1.5 focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer max-w-[90px] sm:max-w-[120px] md:max-w-none truncate"
+                className="text-xs sm:text-sm font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 rounded-lg px-1.5 py-1.5 focus:ring-2 focus:ring-amber-500 focus:outline-none cursor-pointer max-w-[95px] sm:max-w-[125px] lg:max-w-[145px] truncate"
                 aria-label="Select Demo Persona"
               >
                 {allPersonas.map((p) => (
@@ -179,7 +179,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
 
             {/* User Account / Sign Out / Exit Demo */}
-            <div className="flex items-center gap-1.5 pl-1.5 border-l border-slate-200 dark:border-slate-700 shrink-0">
+            <div className="flex items-center gap-1 pl-1 border-l border-slate-200 dark:border-slate-700 shrink-0">
               {currentUser && (
                 <div
                   title={`Signed in as ${currentUser.displayName || currentUser.email}`}
@@ -193,10 +193,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={onSignOut || onViewLanding}
                 title="Sign Out to Landing Page"
                 aria-label="Sign Out"
-                className="inline-flex items-center gap-1 px-2 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 border border-slate-200 dark:border-slate-700 transition-colors text-xs font-semibold cursor-pointer shrink-0"
+                className="inline-flex items-center gap-1 p-1.5 sm:px-2 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 transition-colors text-xs font-bold cursor-pointer shrink-0"
               >
-                <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 dark:text-slate-400" />
-                <span className="hidden md:inline">Sign Out</span>
+                <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-600 dark:text-slate-300 hover:text-red-600" />
+                <span className="hidden 2xl:inline">Sign Out</span>
               </button>
             </div>
           </div>

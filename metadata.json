@@ -1,6 +1,6 @@
 {
   "name": "Kamai Saathi",
-  "description": "An intelligent, inclusive financial empowerment companion for the LG Ideathon (IIT Bombay), featuring voice-first multilingual logging, deterministic ledger calculations, irregular-income cash-flow forecasting, Scam Shield threat analysis, and verified benefits discovery.",
+  "description": "An intelligent, inclusive financial empowerment companion for everyday Indian earners, featuring voice-first multilingual logging, deterministic ledger calculations, irregular-income cash-flow forecasting, Scam Shield threat analysis, and verified benefits discovery.",
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

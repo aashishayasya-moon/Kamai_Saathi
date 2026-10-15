@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BrandLogo, BrandEmblem } from './BrandLogo';
-import { Language } from '../types';
+import { ThemeToggle } from './ThemeToggle';
+import { Language, ThemeMode } from '../types';
 import { sampleVoiceScenarios } from '../services/i18n';
 import {
   Mic,
@@ -23,6 +24,8 @@ interface LandingPageProps {
   onExploreDemo: () => void;
   selectedLanguage: Language;
   onSelectLanguage: (lang: Language) => void;
+  theme: ThemeMode;
+  onToggleTheme: () => void;
 }
 
 export const LandingPage: React.FC<LandingPageProps> = ({
@@ -30,6 +33,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   onExploreDemo,
   selectedLanguage,
   onSelectLanguage,
+  theme,
+  onToggleTheme,
 }) => {
   const [activeAudioLang, setActiveAudioLang] = useState<Language>('hi');
 
@@ -63,6 +68,14 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </select>
             </div>
 
+            {/* Dark Mode / Light Mode Option */}
+            <ThemeToggle
+              theme={theme}
+              onToggleTheme={onToggleTheme}
+              language={selectedLanguage}
+              variant="icon"
+            />
+
             <button
               onClick={onExploreDemo}
               className="text-xs sm:text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white px-2.5 py-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors whitespace-nowrap"
@@ -89,7 +102,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 dark:bg-amber-950/60 border border-amber-200 dark:border-amber-800/80 text-xs font-bold text-amber-700 dark:text-amber-400">
             <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-            <span>LG Ideathon 2026 · IIT Bombay</span>
+            <span>Inclusive Financial Intelligence</span>
           </div>
 
           {/* Headline */}
@@ -323,11 +336,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({
       </section>
 
       {/* 6. Footer */}
-      <footer className="mt-auto py-8 bg-slate-900 text-slate-400 text-xs border-t border-slate-800">
+      <footer className="mt-auto py-8 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 text-xs sm:text-sm border-t border-slate-200 dark:border-slate-800 transition-colors">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <BrandLogo size="sm" />
-          <div>
-            LG Ideathon 2026 · IIT Bombay Prototype · Designed for Financial Inclusion
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-slate-900 dark:text-white font-bold tracking-wide text-xs sm:text-sm bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 shadow-xs">
+              Kamai Saathi · Designed for Financial Inclusion & Everyday Earners
+            </span>
+            <ThemeToggle
+              theme={theme}
+              onToggleTheme={onToggleTheme}
+              language={selectedLanguage}
+              variant="pill"
+            />
           </div>
         </div>
       </footer>

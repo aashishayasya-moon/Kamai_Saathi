@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { BrandLogo, BrandEmblem } from './BrandLogo';
+import { ThemeToggle } from './ThemeToggle';
 import { authService, UserProfile } from '../services/authService';
+import { ThemeMode } from '../types';
 import {
   Lock,
   Mail,
@@ -15,11 +17,15 @@ import {
 interface AuthPageProps {
   onAuthSuccess: (user: UserProfile) => void;
   onBackToLanding: () => void;
+  theme?: ThemeMode;
+  onToggleTheme?: () => void;
 }
 
 export const AuthPage: React.FC<AuthPageProps> = ({
   onAuthSuccess,
   onBackToLanding,
+  theme = 'light',
+  onToggleTheme,
 }) => {
   const [tab, setTab] = useState<'signin' | 'register'>('signin');
   const [name, setName] = useState('');
@@ -67,22 +73,30 @@ export const AuthPage: React.FC<AuthPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative selection:bg-amber-200 selection:text-amber-900 font-sans">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 flex flex-col justify-center py-12 px-4 sm:px-6 lg:px-8 relative selection:bg-amber-200 selection:text-amber-900 font-sans transition-colors">
       {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/10 dark:bg-amber-500/15 blur-[120px] pointer-events-none rounded-full" />
 
-      {/* Back Button */}
-      <div className="max-w-md w-full mx-auto mb-4">
+      {/* Top Header Bar: Back Button & Theme Toggle */}
+      <div className="max-w-md w-full mx-auto mb-4 flex items-center justify-between">
         <button
           onClick={onBackToLanding}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors p-1"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors p-1"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Overview</span>
         </button>
+
+        {onToggleTheme && (
+          <ThemeToggle
+            theme={theme}
+            onToggleTheme={onToggleTheme}
+            variant="icon"
+          />
+        )}
       </div>
 
-      <div className="max-w-md w-full mx-auto bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-700/80 relative z-10 text-slate-900 dark:text-white">
+      <div className="max-w-md w-full mx-auto bg-white dark:bg-slate-800 rounded-3xl p-6 sm:p-8 shadow-xl dark:shadow-2xl border border-slate-200 dark:border-slate-700/80 relative z-10 text-slate-900 dark:text-white">
         {/* Brand Lockup */}
         <div className="text-center space-y-2 mb-6">
           <div className="inline-block">
@@ -237,7 +251,7 @@ export const AuthPage: React.FC<AuthPageProps> = ({
             </button>
           </form>
 
-          {/* Instant Ideathon Demo Bypass */}
+          {/* Instant One-Click Demo Access */}
           <div className="pt-3 border-t border-slate-100 dark:border-slate-700">
             <button
               type="button"

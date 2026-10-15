@@ -146,3 +146,6 @@ export interface SaathiMessage {
   suggestedActions?: string[];
   detectedTransactions?: SaathiDetectedTransaction[];
 }
+
+export type ThemeMode = 'light' | 'dark';
+

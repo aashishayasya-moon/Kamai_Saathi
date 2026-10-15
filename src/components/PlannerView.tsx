@@ -60,7 +60,7 @@ export const PlannerView: React.FC<PlannerViewProps> = ({
           </p>
         </div>
 
-        {/* Shock Injection Toggle for Ideathon Demo */}
+        {/* Shock Injection Simulation Toggle */}
         <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-700/50 p-2.5 rounded-xl border border-slate-200 dark:border-slate-600 shrink-0">
           <div className="text-left">
             <div className="text-xs font-bold text-slate-900 dark:text-white">

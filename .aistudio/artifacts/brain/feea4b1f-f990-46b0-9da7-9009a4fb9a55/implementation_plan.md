@@ -76,7 +76,7 @@ An architectural roadmap to expand **Kamai Saathi** with:
 │  Option A: Record Live Audio (MediaRecorder -> Blob audio/webm)        │
 │  Option B: Upload Audio File (.mp3, .wav, .m4a, .webm, .ogg)           │
 │  Option C: Live Browser SpeechRecognition (Web Speech API)             │
-│  Option D: Verified Scenario Test Chips (Instant Ideathon Demo)        │
+│  Option D: Verified Scenario Test Chips (Instant Multi-Language Demo)  │
 │                                                                        │
 │  Selected Language: [ English | हिन्दी | ಕನ್ನಡ | தமிழ் | తెలుగు | मराठी ] │
 └───────────────────────────────────┬────────────────────────────────────┘

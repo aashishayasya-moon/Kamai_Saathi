@@ -4,6 +4,7 @@ import {
   Persona,
   Transaction,
   ScheduledObligation,
+  ThemeMode,
 } from './types';
 import { personas } from './services/personas';
 import { translations } from './services/i18n';
@@ -76,6 +77,36 @@ export default function App() {
   const [includeShock, setIncludeShock] = useState(true);
   const [hasAppliedEmergencyReserve, setHasAppliedEmergencyReserve] = useState(false);
   const [customObligations, setCustomObligations] = useState<ScheduledObligation[]>([]);
+
+  // 9. Theme State (Dark / Light mode option, persisted in localStorage)
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    const saved = localStorage.getItem('kamai_saathi_theme');
+    if (saved === 'dark' || saved === 'light') return saved;
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.style.colorScheme = 'dark';
+    } else {
+      root.classList.remove('dark');
+      root.style.colorScheme = 'light';
+    }
+    localStorage.setItem('kamai_saathi_theme', theme);
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', theme === 'dark' ? '#0B132B' : '#F8FAFC');
+    }
+  }, [theme]);
+
+  const handleToggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   // Self-test audit check and Firestore connection test on boot
   useEffect(() => {
@@ -242,6 +273,8 @@ export default function App() {
         onSelectLanguage={handleSelectLanguage}
         onGetStarted={() => setCurrentPage('auth')}
         onExploreDemo={handleExploreDemo}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
     );
   }
@@ -252,6 +285,8 @@ export default function App() {
       <AuthPage
         onAuthSuccess={handleAuthSuccess}
         onBackToLanding={() => setCurrentPage('landing')}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
       />
     );
   }
@@ -272,6 +307,8 @@ export default function App() {
         onOpenSchemesModal={() => setIsSchemesModalOpen(true)}
         isLocalOnly={isLocalOnly}
         onToggleLocalOnly={handleToggleLocalOnly}
+        theme={theme}
+        onToggleTheme={handleToggleTheme}
         currentUser={authUser}
         onSignOut={handleSignOut}
         onViewLanding={() => setCurrentPage('landing')}

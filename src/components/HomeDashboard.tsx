@@ -74,7 +74,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-1.5 text-xs text-amber-400 font-bold uppercase tracking-wider">
-              <span>Ideathon Spotlight</span>
+              <span>Earner Profile</span>
               <span aria-hidden="true">·</span>
               <span>{persona.location}</span>
             </div>

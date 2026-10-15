@@ -108,12 +108,22 @@ export interface TranslationDictionary {
     agreeBtn: string;
     switchLocalBtn: string;
   };
+  theme?: {
+    lightMode: string;
+    darkMode: string;
+    toggleTheme: string;
+  };
 }
 
 export const translations: Record<Language, TranslationDictionary> = {
   en: {
     appName: 'Kamai Saathi',
     tagline: 'Money clarity. Safer choices.',
+    theme: {
+      lightMode: 'Light Mode',
+      darkMode: 'Dark Mode',
+      toggleTheme: 'Switch to Dark/Light Mode',
+    },
     nav: {
       home: 'Home',
       ledger: 'My Money',
@@ -228,6 +238,11 @@ export const translations: Record<Language, TranslationDictionary> = {
   hi: {
     appName: 'कमाई साथी',
     tagline: 'पैसे की समझ। सुरक्षित फ़ैसले।',
+    theme: {
+      lightMode: 'लाइट मोड',
+      darkMode: 'डार्क मोड',
+      toggleTheme: 'डार्क/लाइट मोड बदलें',
+    },
     nav: {
       home: 'होम',
       ledger: 'मेरा पैसा',
@@ -342,6 +357,11 @@ export const translations: Record<Language, TranslationDictionary> = {
   kn: {
     appName: 'ಕಮಾಯಿ ಸಾಥಿ',
     tagline: 'ಹಣದ ಸ್ಪಷ್ಟತೆ. ಸುರಕ್ಷಿತ ಆಯ್ಕೆಗಳು.',
+    theme: {
+      lightMode: 'ಲೈಟ್ ಮೋಡ್',
+      darkMode: 'ಡಾರ್ಕ್ ಮೋಡ್',
+      toggleTheme: 'ಡಾರ್ಕ್/ಲೈಟ್ ಮೋಡ್ ಬದಲಿಸಿ',
+    },
     nav: {
       home: 'ಮುಖಪುಟ',
       ledger: 'ನನ್ನ ಹಣ',
@@ -456,6 +476,11 @@ export const translations: Record<Language, TranslationDictionary> = {
   ta: {
     appName: 'கமாய் சாதி',
     tagline: 'பணத் தெளிவு. பாதுகாப்பான முடிவுகள்.',
+    theme: {
+      lightMode: 'லைட் பயன்முறை',
+      darkMode: 'டார்க் பயன்முறை',
+      toggleTheme: 'டார்க்/லைட் பயன்முறை மாற்று',
+    },
     nav: {
       home: 'முகப்பு',
       ledger: 'என் பணம்',
@@ -570,6 +595,11 @@ export const translations: Record<Language, TranslationDictionary> = {
   te: {
     appName: 'కమాయి సాథీ',
     tagline: 'డబ్బుపై స్పష్టత. సురక్షిత నిర్ణయాలు.',
+    theme: {
+      lightMode: 'లైట్ మోడ్',
+      darkMode: 'డార్క్ మోడ్',
+      toggleTheme: 'డార్క్/లైట్ మోడ్ మార్చండి',
+    },
     nav: {
       home: 'హోమ్',
       ledger: 'నా డబ్బు',
@@ -684,6 +714,11 @@ export const translations: Record<Language, TranslationDictionary> = {
   mr: {
     appName: 'कमाई साथी',
     tagline: 'पैशांची स्पष्टता. सुरक्षित निर्णय.',
+    theme: {
+      lightMode: 'लाइट मोड',
+      darkMode: 'डार्क मोड',
+      toggleTheme: 'डार्क/लाइट मोड बदला',
+    },
     nav: {
       home: 'मुख्य',
       ledger: 'माझे पैसे',

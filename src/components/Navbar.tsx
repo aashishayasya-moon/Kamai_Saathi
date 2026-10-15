@@ -178,27 +178,27 @@ export const Navbar: React.FC<NavbarProps> = ({
               <span className="sm:hidden">Log</span>
             </button>
 
-            {/* User Account / Sign Out */}
-            {currentUser && (
-              <div className="flex items-center gap-1 pl-1 border-l border-slate-200 dark:border-slate-700 shrink-0">
+            {/* User Account / Sign Out / Exit Demo */}
+            <div className="flex items-center gap-1.5 pl-1.5 border-l border-slate-200 dark:border-slate-700 shrink-0">
+              {currentUser && (
                 <div
                   title={`Signed in as ${currentUser.displayName || currentUser.email}`}
                   className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 flex items-center justify-center font-bold text-xs uppercase shrink-0"
                 >
                   {(currentUser.displayName || currentUser.email || 'U')[0]}
                 </div>
+              )}
 
-                {onSignOut && (
-                  <button
-                    onClick={onSignOut}
-                    title="Sign Out to Landing Page"
-                    className="p-1 sm:p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors"
-                  >
-                    <LogOut className="w-4 h-4" />
-                  </button>
-                )}
-              </div>
-            )}
+              <button
+                onClick={onSignOut || onViewLanding}
+                title="Sign Out to Landing Page"
+                aria-label="Sign Out"
+                className="inline-flex items-center gap-1 px-2 py-1.5 rounded-lg text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 border border-slate-200 dark:border-slate-700 transition-colors text-xs font-semibold cursor-pointer shrink-0"
+              >
+                <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-slate-500 dark:text-slate-400" />
+                <span className="hidden md:inline">Sign Out</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
